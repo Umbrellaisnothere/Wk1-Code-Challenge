@@ -1,45 +1,45 @@
-    //netSalaryCalculator
+    //net salary calculator
+
 function netSalaryCalculator() {
 
+    
     // The prompt of the basic salary and the benefits
-    prompt = require ('prompt-sync')();
-    let basicSalary = parseFloat(prompt("Please Enter a valid Basic Salary:"));
+    // Basic salary
+    const basicSalary = parseFloat(prompt("Key in  a valid Basic Salary:"));
 
-    let benefits = parseFloat(prompt("Key in benefits:"));
+    // Benefits
+    const benefits = parseFloat(prompt("Key in benefits:"));
 
-    if (isNaN (basicSalary), isNaN(benefits) || (basicSalary)<= 0,(benefits) <=0) {
-        console.log(`Entries must be a number and the basic salary should be >= 0`);
+
+    //Validating the basic salary and the benefits
+    // Basic salary
+    if (isNaN(basicSalary) || basicSalary <= 0) {
+        console.log(`The input should be a number >= 0`);
+
+        return;
+    }
+    
+    //Benefits
+    if (isNaN(benefits) || benefits <= 0) {
+        console.log(`The input should be a number >=`)
+        
+        return;
     }
 
-    return;
-}    
-    
-    // paye
-function paye (taxableIncome) {
-    const paye = 0;
-    if (taxableIncome <= 24000) {
-        paye = taxableIncome * 0.10;
-} else if (taxableIncome <= 32333) {
-        paye = 2400 + (taxableIncome - 24000) * 0.25;
-} else if (taxableIncome <= 500000) {
-    paye = 4403.25 + (taxableIncome -32333) * 0.30;
-}  else if (taxableIncome <= 800000) {
-    paye = 144783.35 + (taxableIncome - 500000) * 0.325;
-} else{
-    paye = 242083.25 + (taxableIncome - 800000) * 0.35;
-}
-return paye;
-}  
 
-// gross salary
-   const grossSalary = basicSalary + benefits;
-   
+    // gross salary
+    const grossSalary = basicSalary + benefits;
 
-    //nhif
 
-    let nhif = 0;
 
-    if(grossSalary <= 5999) nhif = 150;
+
+
+//nhif
+
+let nhif = 0;
+
+if (grossSalary <= 5999) nhif = 150;
+
 else if (grossSalary <= 7999) nhif = 300;
 
 else if (grossSalary <= 11999) nhif = 400;
@@ -73,35 +73,53 @@ else if (grossSalary <= 99999) nhif = 1600;
 else nhif = 1700;
 
 
+//NSSF
+const tier1Limit = 7000;
 
-       //NSSF
-       const tier1Limit = 7000;
-       const tier2Limit = 36000;
-       const nssfRate = 0.06;
+const tier2Limit = 36000;
 
-        let nssf;
+const nssfRate = 0.06;
 
-if ( grossSalary <= tier1Limit) {
+
+let nssf;
+
+if (grossSalary <= tier1Limit) {
     nssf = grossSalary * nssfRate;
-}  else if (grossSalary <= tier2Limit) {
+} else if (grossSalary <= tier2Limit) {
     nssf = tier1Limit * nssfRate + (grossSalary - tier1Limit) * nssfRate;
-}  else {
-    nssf = tier1Limit * nssfRate + (tier2Limit - tier1Limit) *nssfRate;
+} else {
+    nssf = tier1Limit * nssfRate + (tier2Limit - tier1Limit) * nssfRate;
 }
 
-       
-    // deductions
-    const nhifDeduction = grossSalary * nhifRate;
-    const nssfDeduction = grossSalary * nssfRate;
-    
 
-    // net salary
-    const netSalary = grossSalary - paye - nhif - nssf;
+// paye
+    const taxableIncome = grossSalary - nhif - nssf;
+    let paye = 0;
+    if (taxableIncome <= 24000) {
+        paye = taxableIncome * 0.10;
+    } else if (taxableIncome <= 32333) {
+        paye = 2400 + (taxableIncome - 24000) * 0.25;
+    } else if (taxableIncome <= 500000) {
+        paye = 4403.25 + (taxableIncome - 32333) * 0.30;
+    } else if (taxableIncome <= 800000) {
+        paye = 144783.35 + (taxableIncome - 500000) * 0.325;
+    } else {
+        paye = 242083.25 + (taxableIncome - 800000) * 0.35;
+    }
 
-    
-    // Output results
-    console.log(`Paye(Tax): ${paye}`);
-    console.log(`Gross Salary: ${grossSalary}`);
-    console.log(`nhif: ${nhif}`);
-    console.log(`nssf: ${nssf}`);
-    console.log(`net Salary: ${netSalary}`);
+
+// net salary
+const netSalary = grossSalary - paye - nhif - nssf;
+
+
+// Output results
+console.log(`Paye(Tax): ${paye}`);
+console.log(`Gross Salary: ${grossSalary}`);
+console.log(`nhif: ${nhif}`);
+console.log(`nssf: ${nssf}`);
+console.log(`net Salary: ${netSalary}`);
+}
+
+
+//Input to calculate an individual’s Net Salary
+netSalaryCalculator()
